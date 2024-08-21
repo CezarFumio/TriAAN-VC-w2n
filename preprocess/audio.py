@@ -176,7 +176,7 @@ def SplitDataset(all_spks, cfg):
     test_wavs_names  = []
     
     for spk in train_spks:
-        spk_wavs       = glob(f'{cfg.data_path}/{spk}/*mic1*')
+        spk_wavs       = glob(f'{cfg.data_path}/p{spk}/*mic1*')
         spk_wavs_names = [os.path.basename(p).split('.')[0] for p in spk_wavs]
         valid_names    = random.sample(spk_wavs_names, int(len(spk_wavs_names) * cfg.s2s_portion))
         train_names    = [n for n in spk_wavs_names if n not in valid_names]
@@ -188,12 +188,12 @@ def SplitDataset(all_spks, cfg):
         test_wavs_names  += test_names
 
     for spk in valid_spks:
-        spk_wavs         = glob(f'{cfg.data_path}/{spk}/*mic1*')
+        spk_wavs         = glob(f'{cfg.data_path}/p{spk}/*mic1*')
         spk_wavs_names   = [os.path.basename(p).split('.')[0] for p in spk_wavs]
         valid_wavs_names += spk_wavs_names
 
     for spk in test_spks:
-        spk_wavs        = glob(f'{cfg.data_path}/{spk}/*mic1*')
+        spk_wavs        = glob(f'{cfg.data_path}/p{spk}/*mic1*')
         spk_wavs_names  = [os.path.basename(p).split('.')[0] for p in spk_wavs]
         test_wavs_names += spk_wavs_names
     
