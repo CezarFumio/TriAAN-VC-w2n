@@ -29,9 +29,11 @@ def _load_wav(path):
     return wav
 
 def main(cfg):
+
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     
     data_path = Path(cfg.data_path)
-    cpc       = load_cpc(f'{cfg.cpc_path}/cpc.pt').cuda()
+    cpc       = load_cpc(f'{cfg.cpc_path}/cpc.pt').to(device)
     cpc.eval()
     with torch.no_grad():
         modes = ['train', 'valid', 'test']
@@ -39,7 +41,7 @@ def main(cfg):
             metadata = Read_json(data_path/f'{mode}.json')
 
             for i in tqdm(range(len(metadata))):
-                wav       = _load_wav(metadata[i]['wav_path']).cuda()
+                wav       = _load_wav(metadata[i]['wav_path']).to(device)
                 feat      =  cpc(wav, None)[0].squeeze().detach().cpu().numpy()
                 save_path = metadata[i]['mel_path'].replace('mels', 'cpc')
                 os.makedirs(os.path.dirname(save_path), exist_ok=True)
