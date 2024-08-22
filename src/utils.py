@@ -4,7 +4,7 @@ import json
 import numpy as np
 import random
 import torch
-import neptune
+#import neptune
 import pickle
 import yaml
 import fnmatch
@@ -20,8 +20,8 @@ def neptune_load(PARAMS):
     """
     logging: write your neptune account/project, api topken
     """
-    neptune.init('ID/ProjectName', api_token='')
-    neptune.create_experiment(name=PARAMS['ex_name'], params=PARAMS)
+    #neptune.init('ID/ProjectName', api_token='')
+    #neptune.create_experiment(name=PARAMS['ex_name'], params=PARAMS)
             
 def set_experiment(args, cfg):
     
