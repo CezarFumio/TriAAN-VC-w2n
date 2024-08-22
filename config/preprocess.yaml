@@ -13,7 +13,7 @@ window:        hann
 fmin:          80
 fmax:          7600
 s2s_portion:   0.1
-eval_spks:     1 # we can specify the test speakers
-num_samples:   100 # number of sample pairs
+eval_spks:     2 # we can specify the test speakers
+num_samples:   50 # number of sample pairs
 
 
