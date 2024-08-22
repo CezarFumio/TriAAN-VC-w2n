@@ -176,7 +176,7 @@ def SplitDataset(all_spks, cfg):
     test_wavs_names  = []
     
     for spk in train_spks:
-        spk_wavs       = glob(f'{cfg.data_path}/p{spk}/*mic1*')
+        spk_wavs       = glob(f'{cfg.data_path}/{spk}/*mic1*')
         spk_wavs_names = [os.path.basename(p).split('.')[0] for p in spk_wavs]
         valid_names    = random.sample(spk_wavs_names, int(len(spk_wavs_names) * cfg.s2s_portion))
         train_names    = [n for n in spk_wavs_names if n not in valid_names]
@@ -188,16 +188,16 @@ def SplitDataset(all_spks, cfg):
         test_wavs_names  += test_names
 
     for spk in valid_spks:
-        spk_wavs         = glob(f'{cfg.data_path}/p{spk}/*mic1*')
+        spk_wavs         = glob(f'{cfg.data_path}/{spk}/*mic1*')
         spk_wavs_names   = [os.path.basename(p).split('.')[0] for p in spk_wavs]
         valid_wavs_names += spk_wavs_names
 
     for spk in test_spks:
-        spk_wavs        = glob(f'{cfg.data_path}/p{spk}/*mic1*')
+        spk_wavs        = glob(f'{cfg.data_path}/{spk}/*mic1*')
         spk_wavs_names  = [os.path.basename(p).split('.')[0] for p in spk_wavs]
         test_wavs_names += spk_wavs_names
     
-    all_wavs         = glob(f'{cfg.data_path}/*/*mic1.wav')
+    all_wavs         = glob(f'{cfg.data_path}/*/*mic1.flac')
     train_wavs_names = TextCheck(train_wavs_names, cfg) # delete the wavs which don't have text files
     valid_wavs_names = TextCheck(valid_wavs_names, cfg)
     test_wavs_names  = TextCheck(test_wavs_names, cfg)
@@ -321,7 +321,7 @@ def ExtractMelstats(wn2info, train_wavs_names, cfg):
 def SaveFeatures(wav_name, info, mode, cfg):
     
     mel, lf0, mel_len, speaker = info
-    wav_path      = f'{cfg.data_path}/{speaker}/{wav_name}.wav' # can change to special char *
+    wav_path      = f'{cfg.data_path}/{speaker}/{wav_name}.flac' # can change to special char *
     mel_save_path = f'{cfg.output_path}/{mode}/mels/{speaker}/{wav_name}.npy'
     lf0_save_path = f'{cfg.output_path}/{mode}/lf0/{speaker}/{wav_name}.npy'
     
