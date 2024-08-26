@@ -18,7 +18,7 @@ setting:
   fmin:          80
   fmax:          7600
   s2s_portion:   0.1
-  eval_spks:     4   # we can specify the test speakers
+  eval_spks:     3   # we can specify the test speakers
   n_frames:      128
 
 model:
